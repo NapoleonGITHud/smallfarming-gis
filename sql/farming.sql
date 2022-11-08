@@ -131,3 +131,27 @@ INSERT INTO water_lines (
 );
 
 -- ----------------------------------
+CREATE TABLE water_polygons (id SERIAL NOT NULL PRIMARY KEY,
+     name TEXT NULL, 
+	 notes TEXT NULL, 
+	 image TEXT NULL, 
+	 last_update TIMESTAMP DEFAULT now() NOT NULL, 
+	 last_update_by TEXT NOT NULL, 
+	 uuid TEXT UNIQUE NOT NULL
+);
+COMMENT ON TABLE water_polygons IS
+    'This is a table that shows the water polygons.';
+
+CREATE INDEX water_polygons__geometry_idx ON water_polygons (uuid)
+
+INSERT INTO water_polygons (
+    last_update,
+    last_update_by,
+    uuid
+) VALUES (
+    now(),
+    'db-init',
+    '{83946dba-649d-4be5-9ed8-8675d1aab1cc}'
+);
+
+-- ----------------------------------
